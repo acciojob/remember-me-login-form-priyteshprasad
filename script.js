@@ -38,19 +38,21 @@ document.getElementById('loginform').addEventListener('submit', (event)=>{
 	const password = document.getElementById('password').value;
 	const rememberMe = document.getElementById('checkbox');
 	// console.log(rememberMe) 
-	if(username.trim() !== "" && password.trim() !== ""){
+	// if(username.trim() !== "" && password.trim() !== ""){
 		if(rememberMe.checked){
-		localStorage.setItem('username', username);
-		localStorage.setItem('password', password);
+			localStorage.setItem('username', username);
+			localStorage.setItem('password', password);
+			showLoginUserBtn()
 		}else{
 			localStorage.removeItem('username')
 			localStorage.removeItem('password')
 			removeExistingBtn()
 		}
-		alert('Logged in as '+ username) 
-	}
-	showLoginUserBtn()
-	// console.log("line 3",localStorage)
+		
+	// }
+	
+	alert('Logged in as '+ username)
+	console.log("line 3",localStorage)
 
 	
 })
