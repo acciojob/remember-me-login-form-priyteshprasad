@@ -3,6 +3,8 @@
 // console.log("line 3",localStorage)
 
 function showLoginUserBtn(){
+	let areadyExists = document.getElementById('existing');
+	if(areadyExists) return;
 	if(localStorage.getItem('username') && localStorage.getItem('password')){
 		// show buttun for logging as existing customer
 		let existingBtn = document.createElement('button');
@@ -18,6 +20,14 @@ function showLoginUserBtn(){
 }
 showLoginUserBtn()
 
+function removeExistingBtn() {
+	let areadyExists = document.getElementById('existing');
+	if(areadyExists) {
+		areadyExists.remove()
+	}
+	
+}
+
 // add even listener to login form
 document.getElementById('loginform').addEventListener('submit', (event)=>{
 	event.preventDefault();
@@ -26,17 +36,21 @@ document.getElementById('loginform').addEventListener('submit', (event)=>{
 	// get the values
 	const username = document.getElementById('username').value;
 	const password = document.getElementById('password').value;
-	const rememberMe = document.getElementById('checkbox').value;
+	const rememberMe = document.getElementById('checkbox');
+	// console.log(rememberMe) 
 	if(username.trim() !== "" && password.trim() !== ""){
-		if(rememberMe){
+		if(rememberMe.checked){
 		localStorage.setItem('username', username);
 		localStorage.setItem('password', password);
 		}else{
-			localStorage.setItem('username', null)
-			localStorage.setItem('password', null)
+			localStorage.removeItem('username')
+			localStorage.removeItem('password')
+			removeExistingBtn()
 		}
-		alert('Logged in as '+ username)
+		alert('Logged in as '+ username) 
 	}
-	// showLoginUserBtn()
+	showLoginUserBtn()
+	// console.log("line 3",localStorage)
+
 	
 })
